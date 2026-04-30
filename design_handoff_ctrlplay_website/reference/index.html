@@ -1,0 +1,865 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CTRLplay — indie mobile games</title>
+<meta name="description" content="CTRLplay is an indie mobile game studio building precise, free-to-play arcade games. One developer. Games that feel good to play.">
+<link rel="canonical" href="https://ctrlplay.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='26' height='26' rx='5' fill='%230B0C0E' stroke='%23E8B83A' stroke-width='2'/%3E%3Cpath d='M10 19 L16 12 L22 19' stroke='%23E8B83A' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CTRLplay — brand design spec
+   ============================================================ */
+:root {
+  /* color */
+  --bg:         #0B0C0E;
+  --surface:    #14161A;
+  --surface-2:  #1C1F24;
+  --border:     #26292F;
+  --border-2:   #34383F;
+  --text:       #E8E9EC;
+  --text-dim:   #8A8F98;
+  --text-faint: #5A5F68;
+  --brand:      oklch(0.78 0.14 95);          /* CTRLplay gold */
+  --brand-dim:  oklch(0.78 0.14 95 / 0.18);
+  --batondrop:  oklch(0.72 0.19 60);          /* dungeon amber */
+  --chessmusic: oklch(0.78 0.10 220);         /* ambient blue */
+  --worddrop:   oklch(0.78 0.16 145);         /* soft green */
+  --status-live: oklch(0.78 0.16 145);
+  --status-soon: oklch(0.78 0.10 220);
+  --status-dev:  oklch(0.80 0.13 80);
+
+  /* type */
+  --f-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --f-body:    "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --f-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* type scale */
+  --t-xs: 11px;
+  --t-sm: 13px;
+  --t-base: 15px;
+  --t-md: 17px;
+  --t-lg: 21px;
+  --t-xl: 28px;
+  --t-2xl: 40px;
+  --t-3xl: 56px;
+  --t-4xl: 84px;
+
+  /* space + radius */
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --maxw: 1180px;
+}
+
+/* reset */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-body);
+  font-size: var(--t-base);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+/* ambient page texture: extremely subtle vignette so dark feels intentional */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232, 184, 58, 0.05), transparent 60%),
+    radial-gradient(ellipse 100% 80% at 50% 100%, rgba(20, 22, 26, 0.6), transparent 70%);
+  z-index: 0;
+}
+
+main, header, footer { position: relative; z-index: 1; }
+
+/* ============================================================
+   logo
+   ============================================================ */
+.logo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  font-family: var(--f-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  user-select: none;
+}
+.logo__ctrl {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.28em 0.42em 0.32em;
+  border: 1.5px solid currentColor;
+  border-radius: var(--r-sm);
+  font-weight: 700;
+  font-feature-settings: "ss01";
+}
+.logo__ctrl::before {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  border-left: 2px solid currentColor;
+  border-top: 2px solid currentColor;
+  transform: rotate(45deg) translateY(0.1em);
+  margin-right: 0.05em;
+}
+.logo__play {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-style: italic;
+  margin-left: 0.4em;
+  color: var(--brand);
+  letter-spacing: -0.01em;
+}
+
+/* logo size variants */
+.logo--sm { font-size: 16px; }
+.logo--md { font-size: 22px; }
+.logo--lg { font-size: clamp(48px, 9vw, 96px); }
+
+/* ============================================================
+   nav
+   ============================================================ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(11, 12, 14, 0.78);
+  border-bottom: 1px solid var(--border);
+}
+.nav__inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-family: var(--f-body);
+  font-size: var(--t-sm);
+  color: var(--text-dim);
+}
+.nav__links a {
+  transition: color 0.15s ease;
+  position: relative;
+}
+.nav__links a:hover { color: var(--text); }
+.nav__links a[aria-current="page"] { color: var(--text); }
+.nav__links a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -22px;
+  height: 1.5px;
+  background: var(--brand);
+}
+@media (max-width: 600px) {
+  .nav__inner { padding: 14px 20px; gap: 12px; }
+  .nav__links { gap: 18px; font-size: 12px; }
+}
+
+/* ============================================================
+   layout primitives
+   ============================================================ */
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+@media (max-width: 600px) { .wrap { padding: 0 20px; } }
+
+.section { padding: 88px 0; }
+.section--tight { padding: 56px 0; }
+@media (max-width: 700px) { .section { padding: 56px 0; } }
+
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: var(--text-faint);
+}
+
+/* ============================================================
+   hero
+   ============================================================ */
+.hero {
+  padding: 120px 0 64px;
+  position: relative;
+}
+@media (max-width: 700px) { .hero { padding: 72px 0 40px; } }
+
+.hero__mark {
+  margin-bottom: 36px;
+}
+.hero__tagline {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(24px, 3.4vw, 38px);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  max-width: 22ch;
+  color: var(--text);
+  margin: 0 0 18px;
+}
+.hero__sub {
+  font-size: var(--t-md);
+  color: var(--text-dim);
+  max-width: 44ch;
+  margin: 0;
+}
+
+/* keycap shortcut row */
+.hero__shortcut {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 40px;
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  color: var(--text-faint);
+  letter-spacing: 0.08em;
+}
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 24px;
+  padding: 0 7px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-bottom-width: 2px;
+  border-radius: var(--r-sm);
+}
+
+/* ============================================================
+   games grid — intentionally non-uniform
+   ============================================================ */
+.games {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 18px;
+}
+@media (max-width: 900px) { .games { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .games { grid-template-columns: 1fr; } }
+
+.game {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  overflow: hidden;
+  min-height: 320px;
+}
+.game:hover {
+  border-color: var(--border-2);
+  background: var(--surface-2);
+}
+.game[data-status="live"]:hover { border-color: color-mix(in oklab, var(--game-accent) 60%, var(--border)); }
+
+/* spans give cards different shapes */
+.game--featured { grid-column: span 4; min-height: 380px; }
+.game--half { grid-column: span 2; }
+.game--third { grid-column: span 3; }
+@media (max-width: 900px) {
+  .game--featured, .game--half, .game--third { grid-column: span 2; }
+}
+@media (max-width: 560px) {
+  .game--featured, .game--half, .game--third { grid-column: span 1; }
+}
+
+.game__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.game__index {
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  color: var(--text-faint);
+  letter-spacing: 0.1em;
+}
+.game__name {
+  font-family: var(--f-display);
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.05;
+}
+.game--featured .game__name { font-size: clamp(36px, 4.4vw, 56px); }
+
+.game__desc {
+  color: var(--text-dim);
+  font-size: var(--t-base);
+  margin: 0;
+  max-width: 50ch;
+}
+.game__bottom {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+/* status badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 6px 10px;
+  border: 1px solid var(--border-2);
+  border-radius: 999px;
+  background: rgba(0,0,0,0.2);
+}
+.badge__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 3px color-mix(in oklab, currentColor 30%, transparent);
+}
+.badge--live { color: var(--status-live); }
+.badge--live .badge__dot { animation: pulse 1.6s ease-in-out infinite; }
+.badge--soon { color: var(--status-soon); }
+.badge--dev { color: var(--status-dev); }
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 3px color-mix(in oklab, currentColor 30%, transparent); }
+  50% { box-shadow: 0 0 0 6px color-mix(in oklab, currentColor 0%, transparent); }
+}
+
+/* CTA */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-family: var(--f-body);
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--bg);
+  background: var(--brand);
+  border-radius: var(--r-sm);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.cta:hover { transform: translateY(-1px); }
+.cta--game { background: var(--game-accent, var(--brand)); }
+.cta--ghost {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border-2);
+}
+.cta--ghost:hover { color: var(--text); border-color: var(--text-faint); }
+.cta--disabled {
+  background: var(--surface-2);
+  color: var(--text-faint);
+  cursor: not-allowed;
+  pointer-events: none;
+  border: 1px solid var(--border);
+}
+.cta__arrow { transition: transform 0.15s ease; }
+.cta:hover .cta__arrow { transform: translateX(2px); }
+
+/* game card visuals — each game gets a distinct corner motif */
+.game__visual {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+/* BatonDrop: falling lane bars */
+.viz-batondrop {
+  right: 28px;
+  top: 0;
+  bottom: 0;
+  width: 220px;
+  display: flex;
+  gap: 10px;
+  padding: 24px 0;
+  align-items: flex-end;
+}
+.viz-batondrop .lane {
+  flex: 1;
+  background: linear-gradient(to top, color-mix(in oklab, var(--batondrop) 25%, transparent), transparent 70%);
+  border-top: 1.5px solid var(--batondrop);
+  height: 100%;
+  position: relative;
+  border-radius: 1px 1px 0 0;
+}
+.viz-batondrop .baton {
+  position: absolute;
+  left: 50%;
+  width: 60%;
+  height: 6px;
+  background: var(--batondrop);
+  transform: translateX(-50%);
+  border-radius: 1px;
+  box-shadow: 0 0 12px color-mix(in oklab, var(--batondrop) 70%, transparent);
+}
+.viz-batondrop .lane:nth-child(1) .baton { top: 30%; }
+.viz-batondrop .lane:nth-child(2) .baton { top: 65%; }
+.viz-batondrop .lane:nth-child(3) .baton { top: 15%; }
+.viz-batondrop .lane:nth-child(4) .baton { top: 50%; }
+@media (max-width: 700px) { .viz-batondrop { width: 140px; opacity: 0.5; } }
+
+/* ChessMusic: subtle grid + waveform */
+.viz-chessmusic {
+  right: 24px;
+  bottom: 24px;
+  width: 120px;
+  height: 120px;
+}
+.viz-chessmusic .grid {
+  width: 100%; height: 60%;
+  display: grid;
+  grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+}
+.viz-chessmusic .grid div {
+  border: 0.5px solid color-mix(in oklab, var(--chessmusic) 40%, var(--border));
+}
+.viz-chessmusic .grid div:nth-child(odd) { background: color-mix(in oklab, var(--chessmusic) 8%, transparent); }
+.viz-chessmusic .wave {
+  margin-top: 14px;
+  height: 22px;
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+.viz-chessmusic .wave span {
+  flex: 1;
+  background: var(--chessmusic);
+  border-radius: 1px;
+  opacity: 0.7;
+}
+
+/* WordDrop: stacked letter blocks */
+.viz-worddrop {
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--f-mono);
+  font-weight: 500;
+}
+.viz-worddrop span {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 14px;
+  background: color-mix(in oklab, var(--worddrop) 12%, var(--surface));
+  border: 1px solid color-mix(in oklab, var(--worddrop) 35%, var(--border));
+  color: var(--worddrop);
+  border-radius: 3px;
+  letter-spacing: 0.1em;
+  align-self: flex-end;
+}
+
+/* ============================================================
+   studio section
+   ============================================================ */
+.studio {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 64px;
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .studio { grid-template-columns: 1fr; gap: 32px; }
+}
+.studio__copy p {
+  font-family: var(--f-display);
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin: 0 0 18px;
+  max-width: 30ch;
+}
+.studio__copy p + p {
+  font-family: var(--f-body);
+  font-size: var(--t-md);
+  color: var(--text-dim);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* studio meta list */
+.meta {
+  border-top: 1px solid var(--border);
+}
+.meta__row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--t-sm);
+}
+.meta__k {
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.meta__v { color: var(--text); }
+.meta__v a { color: var(--brand); border-bottom: 1px solid color-mix(in oklab, var(--brand) 40%, transparent); }
+.meta__v a:hover { border-color: var(--brand); }
+
+/* ============================================================
+   footer
+   ============================================================ */
+.foot {
+  border-top: 1px solid var(--border);
+  margin-top: 80px;
+  padding: 36px 0 60px;
+}
+.foot__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  color: var(--text-faint);
+  letter-spacing: 0.05em;
+}
+.foot__links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.foot__links a:hover { color: var(--text-dim); }
+.foot__copy { display: flex; align-items: center; gap: 12px; }
+
+/* ============================================================
+   prose pages (privacy, contact)
+   ============================================================ */
+.prose {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 80px 0;
+}
+.prose h1 {
+  font-family: var(--f-display);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin: 16px 0 12px;
+}
+.prose h2 {
+  font-family: var(--f-display);
+  font-size: var(--t-lg);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 48px 0 12px;
+}
+.prose p, .prose li {
+  color: var(--text-dim);
+  font-size: var(--t-base);
+  line-height: 1.65;
+}
+.prose ul {
+  padding-left: 0;
+  list-style: none;
+}
+.prose ul li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 8px;
+}
+.prose ul li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.7em;
+  width: 12px; height: 1px;
+  background: var(--text-faint);
+}
+.prose a {
+  color: var(--brand);
+  border-bottom: 1px solid color-mix(in oklab, var(--brand) 40%, transparent);
+}
+.prose a:hover { border-color: var(--brand); }
+.prose strong { color: var(--text); font-weight: 500; }
+.prose code {
+  font-family: var(--f-mono);
+  font-size: 0.92em;
+  padding: 1px 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text);
+}
+.prose__meta {
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 36px;
+}
+
+/* ============================================================
+   utility
+   ============================================================ */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0;
+  border: 0;
+}
+.text-brand { color: var(--brand); }
+.text-mono { font-family: var(--f-mono); }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<header class="nav">
+  <div class="nav__inner">
+    <a href="index.html" aria-label="CTRLplay home">
+      <span class="logo logo--md"><span class="logo__ctrl">CTRL</span><span class="logo__play">play</span></span>
+    </a>
+    <nav class="nav__links" aria-label="primary">
+      <a href="index.html" aria-current="page">games</a>
+      <a href="privacy.html">privacy</a>
+      <a href="contact.html">contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero__mark">
+        <span class="logo logo--lg"><span class="logo__ctrl">CTRL</span><span class="logo__play">play</span></span>
+      </div>
+      <h1 class="hero__tagline">Indie mobile games built with care.</h1>
+      <p class="hero__sub">A one-developer studio shipping precise, free-to-play arcade games for Android. Each release is small, sharp, and made to feel good in the hand.</p>
+
+      <div class="hero__shortcut">
+        <span>shortcut</span>
+        <span class="kbd">CTRL</span>
+        <span>+</span>
+        <span class="kbd">P</span>
+        <span>= play</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GAMES
+       ============================================================ -->
+  <section class="section section--tight" id="games">
+    <div class="wrap">
+      <div style="display:flex; justify-content:space-between; align-items:end; margin-bottom:32px; gap:24px; flex-wrap:wrap;">
+        <div>
+          <span class="eyebrow">Catalogue / 03</span>
+          <h2 style="font-family:var(--f-display); font-size:var(--t-xl); font-weight:500; letter-spacing:-0.02em; margin:12px 0 0;">Three games. One developer.</h2>
+        </div>
+        <div class="text-mono" style="font-size:var(--t-xs); color:var(--text-faint); letter-spacing:0.1em;">UPDATED 2026.04</div>
+      </div>
+
+      <div class="games">
+
+        <!-- BatonDrop — featured, live -->
+        <article class="game game--featured" data-status="live" style="--game-accent: var(--batondrop);">
+          <div class="viz-batondrop game__visual" aria-hidden="true">
+            <div class="lane"><div class="baton"></div></div>
+            <div class="lane"><div class="baton"></div></div>
+            <div class="lane"><div class="baton"></div></div>
+            <div class="lane"><div class="baton"></div></div>
+          </div>
+          <div class="game__top">
+            <div>
+              <div class="game__index">01 / batondrop</div>
+              <h3 class="game__name" style="margin-top:10px;">BatonDrop</h3>
+            </div>
+            <span class="badge badge--live"><span class="badge__dot"></span>Live</span>
+          </div>
+          <p class="game__desc" style="max-width:32ch;">A baton falls from above. Tap the right lane to catch it. Speed climbs, the dungeon deepens, the ten special batons start arriving in sequence.</p>
+          <div class="game__bottom">
+            <div class="text-mono" style="font-size:var(--t-xs); color:var(--text-faint); letter-spacing:0.08em;">DARK ARCADE · REACTION</div>
+            <a class="cta cta--game" href="games/batondrop.html">View game <span class="cta__arrow">→</span></a>
+          </div>
+        </article>
+
+        <!-- ChessMusic — half, coming soon -->
+        <article class="game game--half" style="--game-accent: var(--chessmusic);">
+          <div class="viz-chessmusic game__visual" aria-hidden="true">
+            <div class="grid">
+              <div></div><div></div><div></div><div></div>
+              <div></div><div></div><div></div><div></div>
+              <div></div><div></div><div></div><div></div>
+              <div></div><div></div><div></div><div></div>
+            </div>
+            <div class="wave">
+              <span style="height:30%"></span>
+              <span style="height:60%"></span>
+              <span style="height:80%"></span>
+              <span style="height:45%"></span>
+              <span style="height:90%"></span>
+              <span style="height:55%"></span>
+              <span style="height:35%"></span>
+              <span style="height:70%"></span>
+            </div>
+          </div>
+          <div class="game__top">
+            <div>
+              <div class="game__index">02 / chessmusic</div>
+              <h3 class="game__name" style="margin-top:10px; font-size:clamp(24px, 2.4vw, 30px);">ChessMusic</h3>
+            </div>
+            <span class="badge badge--soon"><span class="badge__dot"></span>Soon</span>
+          </div>
+          <p class="game__desc" style="font-size:var(--t-sm);">Chess moves drive generative ambient music. Every game is a unique composition.</p>
+          <div class="game__bottom">
+            <a class="cta cta--disabled" aria-disabled="true">In concept</a>
+          </div>
+        </article>
+
+        <!-- WordDrop — half, dev -->
+        <article class="game game--half" style="--game-accent: var(--worddrop);">
+          <div class="viz-worddrop game__visual" aria-hidden="true">
+            <span>W</span>
+            <span>OR</span>
+            <span>DROP</span>
+          </div>
+          <div class="game__top">
+            <div>
+              <div class="game__index">03 / worddrop</div>
+              <h3 class="game__name" style="margin-top:10px; font-size:clamp(24px, 2.4vw, 30px);">WordDrop</h3>
+            </div>
+            <span class="badge badge--dev"><span class="badge__dot"></span>In dev</span>
+          </div>
+          <p class="game__desc" style="font-size:var(--t-sm);">Letters fall. Words form. Details unfolding through the year.</p>
+          <div class="game__bottom">
+            <a class="cta cta--disabled" aria-disabled="true">Early stage</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       STUDIO
+       ============================================================ -->
+  <section class="section" id="studio">
+    <div class="wrap">
+      <div class="studio">
+        <div>
+          <span class="eyebrow">The studio</span>
+        </div>
+        <div class="studio__copy">
+          <p>One developer. Games that feel good to play.</p>
+          <p>CTRLplay is the game-making half of John Roberts' software practice. Small releases, hand-tuned mechanics, and the assumption that a player's time is worth more than a session-length metric.</p>
+
+          <dl class="meta" style="margin-top:36px;">
+            <div class="meta__row">
+              <dt class="meta__k">Founded</dt>
+              <dd class="meta__v">2025 / Solo studio</dd>
+            </div>
+            <div class="meta__row">
+              <dt class="meta__k">Platforms</dt>
+              <dd class="meta__v">Android · Google Play</dd>
+            </div>
+            <div class="meta__row">
+              <dt class="meta__k">Model</dt>
+              <dd class="meta__v">Free-to-play · Optional cosmetics · Optional rewarded ads</dd>
+            </div>
+            <div class="meta__row">
+              <dt class="meta__k">Press / support</dt>
+              <dd class="meta__v"><a href="contact.html">support@ctrlplay.com</a></dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__inner">
+      <div class="foot__copy">
+        <span class="logo logo--sm"><span class="logo__ctrl">CTRL</span><span class="logo__play">play</span></span>
+        <span>© 2026</span>
+      </div>
+      <nav class="foot__links" aria-label="footer">
+        <a href="privacy.html">Privacy</a>
+        <a href="contact.html">Contact</a>
+        <a href="https://play.google.com/" rel="noopener">Google Play</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

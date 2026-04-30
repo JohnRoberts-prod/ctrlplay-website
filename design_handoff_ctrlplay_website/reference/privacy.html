@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — CTRLplay</title>
+<meta name="description" content="The CTRLplay privacy policy. What data our games collect, how it is used, who it is shared with, and how to request deletion.">
+<link rel="canonical" href="https://ctrlplay.com/privacy.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='26' height='26' rx='5' fill='%230B0C0E' stroke='%23E8B83A' stroke-width='2'/%3E%3Cpath d='M10 19 L16 12 L22 19' stroke='%23E8B83A' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B0C0E;--surface:#14161A;--surface-2:#1C1F24;--border:#26292F;--border-2:#34383F;
+  --text:#E8E9EC;--text-dim:#8A8F98;--text-faint:#5A5F68;
+  --brand:oklch(0.78 0.14 95);
+  --f-display:"Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --f-body:"IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --t-xs:11px;--t-sm:13px;--t-base:15px;--t-md:17px;--t-lg:21px;--t-xl:28px;
+  --r-sm:4px;--r-lg:14px;--maxw:1180px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:var(--t-base);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.logo{display:inline-flex;align-items:baseline;font-family:var(--f-display);font-weight:700;letter-spacing:-0.02em;line-height:1;user-select:none}
+.logo__ctrl{display:inline-flex;align-items:center;gap:6px;padding:0.28em 0.42em 0.32em;border:1.5px solid currentColor;border-radius:var(--r-sm);font-weight:700}
+.logo__ctrl::before{content:"";display:inline-block;width:0.55em;height:0.55em;border-left:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg) translateY(0.1em);margin-right:0.05em}
+.logo__play{font-family:var(--f-display);font-weight:400;font-style:italic;margin-left:0.4em;color:var(--brand)}
+.logo--sm{font-size:16px}
+.logo--md{font-size:22px}
+
+.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(11,12,14,0.78);border-bottom:1px solid var(--border)}
+.nav__inner{max-width:var(--maxw);margin:0 auto;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav__links{display:flex;align-items:center;gap:28px;font-family:var(--f-body);font-size:var(--t-sm);color:var(--text-dim)}
+.nav__links a{transition:color 0.15s ease;position:relative}
+.nav__links a:hover{color:var(--text)}
+.nav__links a[aria-current="page"]{color:var(--text)}
+.nav__links a[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:-22px;height:1.5px;background:var(--brand)}
+@media (max-width:600px){.nav__inner{padding:14px 20px;gap:12px}.nav__links{gap:18px;font-size:12px}}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+@media (max-width:600px){.wrap{padding:0 20px}}
+
+/* prose */
+.prose-wrap{max-width:760px;margin:0 auto;padding:64px 28px 80px}
+@media (max-width:600px){.prose-wrap{padding:40px 20px 60px}}
+
+.prose__eyebrow{font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:0.15em;text-transform:uppercase;color:var(--text-faint);display:inline-flex;align-items:center;gap:10px}
+.prose__eyebrow::before{content:"";width:18px;height:1px;background:var(--text-faint)}
+
+.prose h1{font-family:var(--f-display);font-size:clamp(36px,5vw,56px);font-weight:600;letter-spacing:-0.025em;line-height:1.05;margin:18px 0 14px}
+.prose h2{font-family:var(--f-display);font-size:var(--t-xl);font-weight:500;letter-spacing:-0.02em;color:var(--text);margin:56px 0 14px;display:flex;align-items:baseline;gap:14px}
+.prose h2::before{content:counter(sec, decimal-leading-zero);counter-increment:sec;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--brand);letter-spacing:0.1em}
+.prose{counter-reset:sec}
+.prose p,.prose li{color:var(--text-dim);font-size:var(--t-base);line-height:1.7}
+.prose p{margin:0 0 14px}
+.prose ul{padding-left:0;list-style:none;margin:14px 0}
+.prose ul li{position:relative;padding-left:22px;margin-bottom:10px}
+.prose ul li::before{content:"";position:absolute;left:0;top:0.7em;width:12px;height:1px;background:var(--text-faint)}
+.prose strong{color:var(--text);font-weight:500}
+.prose a{color:var(--brand);border-bottom:1px solid color-mix(in oklab, var(--brand) 40%, transparent)}
+.prose a:hover{border-color:var(--brand)}
+
+.lede{font-family:var(--f-display);font-size:var(--t-lg);color:var(--text);font-weight:400;line-height:1.5;letter-spacing:-0.005em;margin:8px 0 36px;max-width:50ch}
+
+.meta-bar{display:flex;flex-wrap:wrap;gap:18px;padding:18px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:0 0 36px;font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:0.1em;text-transform:uppercase;color:var(--text-faint)}
+.meta-bar__k{color:var(--text-faint)}
+.meta-bar__v{color:var(--text-dim);margin-left:8px}
+
+.toc{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 24px;padding:20px 0;margin:0 0 32px;border-bottom:1px solid var(--border);counter-reset:toc}
+@media (max-width:600px){.toc{grid-template-columns:1fr}}
+.toc a{font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:0.08em;text-transform:uppercase;color:var(--text-faint);padding:6px 0;display:flex;gap:14px}
+.toc a::before{counter-increment:toc;content:counter(toc, decimal-leading-zero);color:var(--brand)}
+.toc a:hover{color:var(--text)}
+
+.kv{border-top:1px solid var(--border);margin:14px 0 14px}
+.kv__row{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--border);font-size:var(--t-sm)}
+@media (max-width:600px){.kv__row{grid-template-columns:1fr;gap:4px}}
+.kv__k{font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:0.1em;text-transform:uppercase;color:var(--text-faint)}
+.kv__v{color:var(--text-dim)}
+.kv__v strong{color:var(--text)}
+
+.foot{border-top:1px solid var(--border);margin-top:60px;padding:36px 0 60px}
+.foot__inner{max-width:var(--maxw);margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--text-faint);letter-spacing:0.05em}
+.foot__links{display:flex;gap:24px;flex-wrap:wrap}
+.foot__links a:hover{color:var(--text-dim)}
+.foot__copy{display:flex;align-items:center;gap:12px}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a href="index.html" aria-label="CTRLplay home">
+      <span class="logo logo--md"><span class="logo__ctrl">CTRL</span><span class="logo__play">play</span></span>
+    </a>
+    <nav class="nav__links" aria-label="primary">
+      <a href="index.html">games</a>
+      <a href="privacy.html" aria-current="page">privacy</a>
+      <a href="contact.html">contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <article class="prose-wrap prose">
+    <span class="prose__eyebrow">Legal · Compliance</span>
+    <h1>Privacy Policy</h1>
+    <p class="lede">CTRLplay collects the minimum amount of data needed to make our games work. This page explains what we collect, why, and how to make us forget you.</p>
+
+    <div class="meta-bar">
+      <div><span class="meta-bar__k">Effective date</span><span class="meta-bar__v">[YYYY-MM-DD]</span></div>
+      <div><span class="meta-bar__k">Version</span><span class="meta-bar__v">1.0</span></div>
+      <div><span class="meta-bar__k">Applies to</span><span class="meta-bar__v">All CTRLplay games</span></div>
+    </div>
+
+    <nav class="toc" aria-label="contents">
+      <a href="#scope">Scope</a>
+      <a href="#data">What we collect</a>
+      <a href="#use">How we use it</a>
+      <a href="#third">Third parties</a>
+      <a href="#retention">Data retention</a>
+      <a href="#rights">Your rights (GDPR / CCPA)</a>
+      <a href="#children">Children</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <h2 id="scope">Scope</h2>
+    <p>This policy applies to all games and services published by CTRLplay (the "Studio", "we", "us"), including but not limited to <strong>BatonDrop</strong>, <strong>ChessMusic</strong>, and <strong>WordDrop</strong>, and to this website. If a specific game has additional data practices, that game's listing will link to a supplemental policy. In the absence of a supplement, this policy governs.</p>
+
+    <h2 id="data">What we collect</h2>
+    <p>We collect only what is necessary to operate the game and improve it.</p>
+    <ul>
+      <li><strong>Device identifier.</strong> A reset-able advertising ID provided by the operating system, used to distinguish one install from another for crash reporting and ad serving. We do not link this ID to your real-world identity.</li>
+      <li><strong>Gameplay statistics.</strong> Anonymous metrics such as score, level reached, runs played, and time-to-fail. Used to balance difficulty and detect bugs. Never tied to a real-world identity.</li>
+      <li><strong>Optional leaderboard name.</strong> If you opt in to a leaderboard, the display name you choose is stored alongside your score. You may pick any name; it does not need to identify you.</li>
+      <li><strong>Crash and diagnostic data.</strong> When the game crashes, a diagnostic report including device model, OS version, and a stack trace is sent to us so we can fix the bug.</li>
+    </ul>
+    <p>We do <strong>not</strong> collect: contact information, location, contacts, photos, microphone or camera data, or any sensitive personal information.</p>
+
+    <h2 id="use">How we use it</h2>
+    <ul>
+      <li><strong>To run the leaderboard.</strong> Your opted-in display name and score are stored so other players can see them.</li>
+      <li><strong>To improve the game.</strong> Aggregated gameplay statistics inform balance and design changes.</li>
+      <li><strong>To diagnose crashes.</strong> Diagnostic reports are reviewed to find and fix bugs.</li>
+      <li><strong>To serve optional rewarded ads.</strong> If you choose to watch a rewarded ad, the advertising ID is shared with our ad partner so a relevant ad can be served.</li>
+    </ul>
+    <p>We do not sell personal information and we do not use your data to build a profile of you across other services.</p>
+
+    <h2 id="third">Third parties</h2>
+    <p>We rely on a small number of vendors to operate the games. Each is bound by their own privacy policy.</p>
+    <div class="kv">
+      <div class="kv__row">
+        <div class="kv__k">Google Play</div>
+        <div class="kv__v"><strong>Distribution, billing, and Play Games services.</strong> Receives purchase events and an advertising ID under Google's terms.</div>
+      </div>
+      <div class="kv__row">
+        <div class="kv__k">Google AdMob</div>
+        <div class="kv__v"><strong>Optional rewarded ads.</strong> Only contacted when a player initiates a rewarded ad. Receives the advertising ID and a request for an ad.</div>
+      </div>
+      <div class="kv__row">
+        <div class="kv__k">Supabase</div>
+        <div class="kv__v"><strong>Leaderboard storage.</strong> Stores opt-in display names and scores. Hosted in the EU. Anonymous unless you choose a name that identifies you.</div>
+      </div>
+      <div class="kv__row">
+        <div class="kv__k">Crash reporting</div>
+        <div class="kv__v"><strong>Stack traces and device metadata.</strong> Stored on a self-hosted endpoint operated by the Studio.</div>
+      </div>
+    </div>
+
+    <h2 id="retention">Data retention</h2>
+    <p>Crash and diagnostic data is retained for <strong>90 days</strong> and then deleted. Aggregated gameplay statistics are retained indefinitely in a form that cannot be linked back to an individual install.</p>
+    <p>Leaderboard entries persist as long as the leaderboard exists for the game in question. You can request deletion of your leaderboard entry at any time using the contact details below.</p>
+
+    <h2 id="rights">Your rights (GDPR and CCPA)</h2>
+    <p>Whether you are in the EU, the UK, California, or elsewhere, you have the right to:</p>
+    <ul>
+      <li><strong>Access</strong> the data we hold about you.</li>
+      <li><strong>Correct</strong> data that is inaccurate.</li>
+      <li><strong>Delete</strong> your data, including any leaderboard entries.</li>
+      <li><strong>Object</strong> to processing or withdraw consent for optional features such as rewarded ads.</li>
+      <li><strong>Port</strong> a copy of your data in a machine-readable format.</li>
+    </ul>
+    <p>To exercise any of these rights, email us using the contact details below. We respond to verified requests within 30 days. We do not sell personal information, so the CCPA right to opt out of sale is automatically honored.</p>
+
+    <h2 id="children">Children</h2>
+    <p>Our games are rated for all ages, but they are not directed at children under 13. We do not knowingly collect personal information from children. If you believe a child has provided us with personal information, contact us and we will delete it.</p>
+
+    <h2 id="contact">Contact</h2>
+    <p>For privacy questions, data requests, or anything else covered by this policy:</p>
+    <div class="kv">
+      <div class="kv__row">
+        <div class="kv__k">Email</div>
+        <div class="kv__v"><a href="mailto:privacy@ctrlplay.com">privacy@ctrlplay.com</a></div>
+      </div>
+      <div class="kv__row">
+        <div class="kv__k">Studio</div>
+        <div class="kv__v">CTRLplay · operated by John Roberts</div>
+      </div>
+      <div class="kv__row">
+        <div class="kv__k">Response time</div>
+        <div class="kv__v">Within 30 days for verified requests.</div>
+      </div>
+    </div>
+
+    <p style="margin-top:48px;font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:0.1em;text-transform:uppercase;color:var(--text-faint)">
+      End of policy · v1.0
+    </p>
+  </article>
+</main>
+
+<footer class="foot">
+  <div class="foot__inner">
+    <div class="foot__copy">
+      <span class="logo logo--sm"><span class="logo__ctrl">CTRL</span><span class="logo__play">play</span></span>
+      <span>© 2026</span>
+    </div>
+    <nav class="foot__links" aria-label="footer">
+      <a href="privacy.html">Privacy</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://play.google.com/" rel="noopener">Google Play</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

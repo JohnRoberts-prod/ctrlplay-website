@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — CTRLplay</title>
+<meta name="description" content="Get in touch with CTRLplay. Support, press, and bug reports for BatonDrop and WordDrop.">
+<link rel="canonical" href="https://ctrlplay.com/contact.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='26' height='26' rx='5' fill='%230B0C0E' stroke='%23E8B83A' stroke-width='2'/%3E%3Cpath d='M10 19 L16 12 L22 19' stroke='%23E8B83A' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B0C0E;--surface:#14161A;--surface-2:#1C1F24;--border:#26292F;--border-2:#34383F;
+  --text:#E8E9EC;--text-dim:#8A8F98;--text-faint:#5A5F68;
+  --brand:oklch(0.78 0.14 95);
+  --batondrop:oklch(0.72 0.19 60);
+  --worddrop:oklch(0.78 0.16 145);
+  --f-display:"Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --f-body:"IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --t-xs:11px;--t-sm:13px;--t-base:15px;--t-md:17px;--t-lg:21px;--t-xl:28px;
+  --r-sm:4px;--r-lg:14px;--maxw:1180px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:var(--t-base);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+.logo{display:inline-flex;align-items:baseline;font-family:var(--f-display);font-weight:700;letter-spacing:-0.02em;line-height:1;user-select:none}
+.logo__ctrl{display:inline-flex;align-items:center;gap:6px;padding:0.28em 0.42em 0.32em;border:1.5px solid currentColor;border-radius:var(--r-sm);font-weight:700}
+.logo__ctrl::before{content:"";display:inline-block;width:0.55em;height:0.55em;border-left:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg) translateY(0.1em);margin-right:0.05em}
+.logo__play{font-family:var(--f-display);font-weight:400;font-style:italic;margin-left:0.4em;color:var(--brand)}
+.logo--sm{font-size:16px}
+.logo--md{font-size:22px}
+
+.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(11,12,14,0.78);border-bottom:1px solid var(--border)}
+.nav__inner{max-width:var(--maxw);margin:0 auto;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav__links{display:flex;align-items:center;gap:28px;font-family:var(--f-body);font-size:var(--t-sm);color:var(--text-dim)}
+.nav__links a{transition:color 0.15s ease;position:relative}
+.nav__links a:hover{color:var(--text)}
+.nav__links a[aria-current="page"]{color:var(--text)}
+.nav__links a[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:-22px;height:1.5px;background:var(--brand)}
+@media (max-width:600px){.nav__inner{padding:14px 20px;gap:12px}.nav__links{gap:18px;font-size:12px}}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+@media (max-width:600px){.wrap{padding:0 20px}}
+
+.eyebrow{font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:0.15em;text-transform:uppercase;color:var(--text-faint);display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:18px;height:1px;background:var(--text-faint)}
+
+/* contact specific */
+.c-hero{padding:80px 0 32px}
+@media (max-width:700px){.c-hero{padding:48px 0 24px}}
+.c-hero h1{font-family:var(--f-display);font-size:clamp(40px,6vw,72px);font-weight:600;letter-spacing:-0.03em;line-height:1.0;margin:18px 0 14px;max-width:14ch}
+.c-hero p{font-family:var(--f-display);font-size:clamp(18px,2.2vw,24px);font-weight:400;color:var(--text-dim);max-width:48ch;margin:0;line-height:1.45}
+
+.c-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;padding:24px 0 64px}
+@media (max-width:880px){.c-grid{grid-template-columns:1fr}}
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  padding:32px;
+  display:flex;flex-direction:column;gap:20px;
+}
+.card__h{font-family:var(--f-display);font-size:var(--t-xl);font-weight:500;letter-spacing:-0.02em;margin:0;line-height:1.1}
+.card__d{color:var(--text-dim);margin:0;font-size:var(--t-sm)}
+
+.email-row{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:18px 20px;
+  background:var(--bg);
+  border:1px solid var(--border-2);
+  border-radius:var(--r-sm);
+  font-family:var(--f-mono);
+}
+.email-row__addr{font-size:var(--t-md);color:var(--brand);letter-spacing:-0.01em;flex:1;min-width:180px}
+.email-row__copy{
+  font-family:var(--f-mono);font-size:var(--t-xs);
+  padding:8px 12px;border-radius:var(--r-sm);
+  background:var(--surface-2);color:var(--text-dim);
+  border:1px solid var(--border-2);
+  transition:all 0.15s ease;
+  letter-spacing:0.08em;text-transform:uppercase;
+  cursor:pointer;
+}
+.email-row__copy:hover{color:var(--text);border-color:var(--text-faint)}
+
+.kv{border-top:1px solid var(--border);margin:0}
+.kv__row{display:grid;grid-template-columns:160px 1fr;gap:20px;padding:14px 0;border-bottom:1px solid var(--border);font-size:var(--t-sm)}
+.kv__k{font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:0.1em;text-transform:uppercase;color:var(--text-faint)}
+.kv__v{color:var(--text)}
+
+/* game directory */
+.dir{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.dir__row{
+  display:grid;grid-template-columns:auto 1fr auto auto;gap:24px;align-items:center;
+  padding:20px 0;border-bottom:1px solid var(--border);
+  transition:padding 0.2s ease;
+}
+.dir__row:last-child{border-bottom:0}
+.dir__row:hover{padding-left:8px}
+.dir__sym{
+  width:40px;height:40px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border-2);
+  border-radius:var(--r-sm);
+  font-family:var(--f-mono);font-size:var(--t-md);
+  color:var(--game-color, var(--brand));
+}
+.dir__name{font-family:var(--f-display);font-size:var(--t-md);font-weight:500;letter-spacing:-0.01em}
+.dir__name small{display:block;color:var(--text-dim);font-family:var(--f-body);font-weight:400;font-size:var(--t-xs);letter-spacing:0;margin-top:2px}
+.dir__status{
+  font-family:var(--f-mono);font-size:var(--t-xs);
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--game-color, var(--brand));
+}
+.dir__link{
+  font-family:var(--f-mono);font-size:var(--t-xs);
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text-faint);
+  transition:color 0.15s ease;
+}
+.dir__link:hover{color:var(--text)}
+@media (max-width:600px){
+  .dir__row{grid-template-columns:auto 1fr;gap:14px}
+  .dir__status,.dir__link{grid-column:2;font-size:10px;padding-top:0}
+  .dir__status{margin-top:4px}
+}
+
+/* response time inline strip */
+.strip{
+  display:flex;align-items:center;gap:18px;
+  padding:14px 18px;
+  background:var(--bg);
+  border:1px solid var(--border-2);
+  border-radius:var(--r-sm);
+  font-family:var(--f-mono);font-size:var(--t-xs);
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text-dim);
+}
+.strip__dot{width:7px;height:7px;border-radius:50%;background:var(--status-live, oklch(0.78 0.16 145));box-shadow:0 0 0 3px color-mix(in oklab, oklch(0.78 0.16 145) 30%, transparent);animation:p 1.6s ease-in-out infinite}
+@keyframes p{0%,100%{box-shadow:0 0 0 3px color-mix(in oklab, oklch(0.78 0.16 145) 30%, transparent)}50%{box-shadow:0 0 0 6px color-mix(in oklab, oklch(0.78 0.16 145) 0%, transparent)}}
+
+.foot{border-top:1px solid var(--border);margin-top:60px;padding:36px 0 60px}
+.foot__inner{max-width:var(--maxw);margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--text-faint);letter-spacing:0.05em}
+.foot__links{display:flex;gap:24px;flex-wrap:wrap}
+.foot__links a:hover{color:var(--text-dim)}
+.foot__copy{display:flex;align-items:center;gap:12px}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a href="index.html" aria-label="CTRLplay home">
+      <span class="logo logo--md"><span class="logo__ctrl">CTRL</span><span class="logo__play">play</span></span>
+    </a>
+    <nav class="nav__links" aria-label="primary">
+      <a href="index.html">games</a>
+      <a href="privacy.html">privacy</a>
+      <a href="contact.html" aria-current="page">contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="wrap c-hero">
+    <span class="eyebrow">Contact / Support</span>
+    <h1>Got a question? Send an email.</h1>
+    <p>We're a one-developer studio, so there's no contact form, no ticket portal, no chatbot. Just a real inbox, read and answered by the person who wrote the game.</p>
+  </section>
+
+  <section class="wrap">
+    <div class="c-grid">
+
+      <div class="card">
+        <span class="eyebrow">General support</span>
+        <h2 class="card__h">For bugs, billing, accounts, and anything else.</h2>
+        <p class="card__d">Tell us which game, the device you're on, and what happened. A screenshot helps.</p>
+
+        <div class="email-row">
+          <span class="email-row__addr">support@ctrlplay.com</span>
+          <a class="email-row__copy" href="mailto:support@ctrlplay.com">Compose →</a>
+        </div>
+
+        <div class="strip">
+          <span class="strip__dot"></span>
+          <span>Inbox · Open · Replies within 3 business days</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="eyebrow">Other inboxes</span>
+        <h2 class="card__h" style="font-size:var(--t-lg)">Specialised lines.</h2>
+        <dl class="kv">
+          <div class="kv__row">
+            <dt class="kv__k">Privacy</dt>
+            <dd class="kv__v"><a style="color:var(--brand)" href="mailto:privacy@ctrlplay.com">privacy@ctrlplay.com</a></dd>
+          </div>
+          <div class="kv__row">
+            <dt class="kv__k">Press</dt>
+            <dd class="kv__v"><a style="color:var(--brand)" href="mailto:press@ctrlplay.com">press@ctrlplay.com</a></dd>
+          </div>
+          <div class="kv__row">
+            <dt class="kv__k">Bug reports</dt>
+            <dd class="kv__v"><a style="color:var(--brand)" href="mailto:bugs@ctrlplay.com">bugs@ctrlplay.com</a></dd>
+          </div>
+          <div class="kv__row">
+            <dt class="kv__k">Studio</dt>
+            <dd class="kv__v">CTRLplay · operated by John Roberts</dd>
+          </div>
+        </dl>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-bottom:80px">
+    <div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:24px;gap:24px;flex-wrap:wrap">
+      <div>
+        <span class="eyebrow">Game directory</span>
+        <h2 style="font-family:var(--f-display);font-size:var(--t-xl);font-weight:500;letter-spacing:-0.02em;margin:12px 0 0">Looking for a specific game?</h2>
+      </div>
+      <span style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--text-faint);letter-spacing:0.1em">02 LISTED</span>
+    </div>
+
+    <div class="dir">
+      <a class="dir__row" href="games/batondrop.html" style="--game-color: var(--batondrop)">
+        <span class="dir__sym">|</span>
+        <span class="dir__name">BatonDrop<small>Dark arcade reaction game</small></span>
+        <span class="dir__status">Live</span>
+        <span class="dir__link">View page →</span>
+      </a>
+      <div class="dir__row" style="--game-color: var(--worddrop);cursor:default">
+        <span class="dir__sym">A</span>
+        <span class="dir__name">WordDrop<small>Word puzzle — coming soon</small></span>
+        <span class="dir__status">Soon</span>
+        <span class="dir__link" style="opacity:0.4">No page yet</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot__inner">
+    <div class="foot__copy">
+      <span class="logo logo--sm"><span class="logo__ctrl">CTRL</span><span class="logo__play">play</span></span>
+      <span>© 2026</span>
+    </div>
+    <nav class="foot__links" aria-label="footer">
+      <a href="privacy.html">Privacy</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://play.google.com/" rel="noopener">Google Play</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

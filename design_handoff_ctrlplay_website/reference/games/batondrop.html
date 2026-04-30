@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BatonDrop — CTRLplay</title>
+<meta name="description" content="BatonDrop is a dark arcade reaction game by CTRLplay. A baton falls. You tap the right lane. Speed climbs. Special batons rewrite the rules.">
+<link rel="canonical" href="https://ctrlplay.com/games/batondrop.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='26' height='26' rx='5' fill='%230B0C0E' stroke='%23E8B83A' stroke-width='2'/%3E%3Cpath d='M10 19 L16 12 L22 19' stroke='%23E8B83A' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CTRLplay — brand spec (shared)
+   ============================================================ */
+:root {
+  --bg:#0B0C0E; --surface:#14161A; --surface-2:#1C1F24;
+  --border:#26292F; --border-2:#34383F;
+  --text:#E8E9EC; --text-dim:#8A8F98; --text-faint:#5A5F68;
+  --brand:oklch(0.78 0.14 95);
+  --brand-dim:oklch(0.78 0.14 95 / 0.18);
+  --batondrop:oklch(0.72 0.19 60);
+  --chessmusic:oklch(0.78 0.10 220);
+  --worddrop:oklch(0.78 0.16 145);
+  --status-live:oklch(0.78 0.16 145);
+  --status-soon:oklch(0.78 0.10 220);
+  --status-dev:oklch(0.80 0.13 80);
+  --f-display:"Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --f-body:"IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --t-xs:11px; --t-sm:13px; --t-base:15px; --t-md:17px; --t-lg:21px;
+  --t-xl:28px; --t-2xl:40px; --t-3xl:56px; --t-4xl:84px;
+  --r-sm:4px; --r-md:8px; --r-lg:14px; --r-xl:20px;
+  --maxw:1180px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:var(--t-base);line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 0%, color-mix(in oklab, var(--batondrop) 8%, transparent), transparent 60%);z-index:0}
+main,header,footer{position:relative;z-index:1}
+
+/* logo */
+.logo{display:inline-flex;align-items:baseline;gap:0;font-family:var(--f-display);font-weight:700;letter-spacing:-0.02em;line-height:1;user-select:none}
+.logo__ctrl{display:inline-flex;align-items:center;gap:6px;padding:0.28em 0.42em 0.32em;border:1.5px solid currentColor;border-radius:var(--r-sm);font-weight:700}
+.logo__ctrl::before{content:"";display:inline-block;width:0.55em;height:0.55em;border-left:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg) translateY(0.1em);margin-right:0.05em}
+.logo__play{font-family:var(--f-display);font-weight:400;font-style:italic;margin-left:0.4em;color:var(--brand);letter-spacing:-0.01em}
+.logo--sm{font-size:16px}
+.logo--md{font-size:22px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:rgba(11,12,14,0.78);border-bottom:1px solid var(--border)}
+.nav__inner{max-width:var(--maxw);margin:0 auto;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav__links{display:flex;align-items:center;gap:28px;font-family:var(--f-body);font-size:var(--t-sm);color:var(--text-dim)}
+.nav__links a{transition:color 0.15s ease;position:relative}
+.nav__links a:hover{color:var(--text)}
+.nav__links a[aria-current="page"]{color:var(--text)}
+.nav__links a[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:-22px;height:1.5px;background:var(--brand)}
+@media (max-width:600px){.nav__inner{padding:14px 20px;gap:12px}.nav__links{gap:18px;font-size:12px}}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+@media (max-width:600px){.wrap{padding:0 20px}}
+.section{padding:88px 0}
+.section--tight{padding:56px 0}
+@media (max-width:700px){.section{padding:56px 0}}
+.eyebrow{font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:0.15em;text-transform:uppercase;color:var(--text-faint);display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:18px;height:1px;background:var(--text-faint)}
+
+/* badges + cta */
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);padding:6px 10px;border:1px solid var(--border-2);border-radius:999px;background:rgba(0,0,0,0.2)}
+.badge__dot{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 3px color-mix(in oklab, currentColor 30%, transparent)}
+.badge--live{color:var(--status-live)}
+.badge--live .badge__dot{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px color-mix(in oklab, currentColor 30%, transparent)}50%{box-shadow:0 0 0 6px color-mix(in oklab, currentColor 0%, transparent)}}
+.cta{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;font-family:var(--f-body);font-size:var(--t-sm);font-weight:500;color:var(--bg);background:var(--brand);border-radius:var(--r-sm);transition:transform 0.15s ease}
+.cta:hover{transform:translateY(-1px)}
+.cta--game{background:var(--batondrop);color:#1A0F00}
+.cta--ghost{background:transparent;color:var(--text-dim);border:1px solid var(--border-2)}
+.cta--ghost:hover{color:var(--text);border-color:var(--text-faint)}
+.cta__arrow{transition:transform 0.15s ease}
+.cta:hover .cta__arrow{transform:translateX(2px)}
+
+/* footer */
+.foot{border-top:1px solid var(--border);margin-top:80px;padding:36px 0 60px}
+.foot__inner{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;font-family:var(--f-mono);font-size:var(--t-xs);color:var(--text-faint);letter-spacing:0.05em}
+.foot__links{display:flex;gap:24px;flex-wrap:wrap}
+.foot__links a:hover{color:var(--text-dim)}
+.foot__copy{display:flex;align-items:center;gap:12px}
+
+/* ============================================================
+   batondrop page
+   ============================================================ */
+
+/* breadcrumb */
+.crumb{font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:0.1em;text-transform:uppercase;color:var(--text-faint);padding:24px 0 0}
+.crumb a{color:var(--text-faint)}
+.crumb a:hover{color:var(--text-dim)}
+.crumb__sep{margin:0 8px;color:var(--border-2)}
+
+/* hero */
+.bd-hero{padding:60px 0 40px;display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center}
+@media (max-width:880px){.bd-hero{grid-template-columns:1fr;gap:32px;padding-top:32px}}
+.bd-hero__title{
+  font-family:var(--f-display);
+  font-size:clamp(48px, 9vw, 112px);
+  font-weight:700;
+  letter-spacing:-0.04em;
+  line-height:0.92;
+  margin:18px 0 18px;
+  color:var(--text);
+}
+.bd-hero__title em{
+  font-style:italic;
+  font-weight:400;
+  color:var(--batondrop);
+}
+.bd-hero__tag{
+  font-family:var(--f-display);
+  font-size:clamp(20px, 2.4vw, 26px);
+  font-weight:400;
+  color:var(--text-dim);
+  margin:0 0 28px;
+  max-width:32ch;
+  line-height:1.35;
+}
+.bd-hero__meta{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:32px}
+.bd-hero__ctas{display:flex;gap:12px;flex-wrap:wrap}
+
+/* the visual: a stylized lane field */
+.bd-lanes{
+  position:relative;
+  aspect-ratio:9/16;
+  max-width:380px;
+  width:100%;
+  margin:0 auto;
+  background:linear-gradient(180deg, #08090B 0%, #100B05 100%);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+}
+.bd-lanes__grid{
+  position:absolute;inset:0;
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+}
+.bd-lanes__grid > div{
+  border-right:1px dashed color-mix(in oklab, var(--batondrop) 18%, transparent);
+  position:relative;
+}
+.bd-lanes__grid > div:last-child{border-right:0}
+.bd-lanes__floor{
+  position:absolute;left:0;right:0;bottom:0;height:14%;
+  background:linear-gradient(180deg, transparent, color-mix(in oklab, var(--batondrop) 22%, transparent));
+  border-top:2px solid var(--batondrop);
+  box-shadow:0 -10px 40px color-mix(in oklab, var(--batondrop) 35%, transparent);
+}
+.bd-lanes__pads{
+  position:absolute;left:0;right:0;bottom:0;height:14%;
+  display:grid;grid-template-columns:repeat(4, 1fr);
+  padding:0 6px 6px;gap:4px;
+}
+.bd-lanes__pad{
+  background:color-mix(in oklab, var(--batondrop) 12%, transparent);
+  border:1px solid color-mix(in oklab, var(--batondrop) 40%, transparent);
+  border-radius:var(--r-sm);
+}
+.bd-lanes__pad--hit{
+  background:color-mix(in oklab, var(--batondrop) 35%, transparent);
+  border-color:var(--batondrop);
+  box-shadow:0 0 24px color-mix(in oklab, var(--batondrop) 60%, transparent), inset 0 0 12px color-mix(in oklab, var(--batondrop) 30%, transparent);
+}
+.bd-baton{
+  position:absolute;
+  width:48%;
+  height:8px;
+  background:var(--batondrop);
+  border-radius:2px;
+  box-shadow:0 0 16px color-mix(in oklab, var(--batondrop) 70%, transparent);
+}
+.bd-baton--1{top:18%;left:6%}
+.bd-baton--2{top:42%;left:30%}
+.bd-baton--3{top:64%;left:54%;background:#E8E9EC;box-shadow:0 0 16px rgba(232,233,236,0.4)}
+
+/* how-it-plays */
+.how{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+@media (max-width:780px){.how{grid-template-columns:1fr}}
+.how__step{
+  padding:36px 32px;
+  border-right:1px solid var(--border);
+  position:relative;
+}
+.how__step:last-child{border-right:0}
+@media (max-width:780px){
+  .how__step{border-right:0;border-bottom:1px solid var(--border)}
+  .how__step:last-child{border-bottom:0}
+}
+.how__num{
+  font-family:var(--f-mono);
+  font-size:var(--t-xs);
+  letter-spacing:0.15em;
+  color:var(--batondrop);
+}
+.how__h{
+  font-family:var(--f-display);
+  font-size:var(--t-lg);
+  font-weight:500;
+  letter-spacing:-0.01em;
+  margin:14px 0 8px;
+  color:var(--text);
+}
+.how__p{color:var(--text-dim);margin:0;font-size:var(--t-sm)}
+
+/* batons (the bestiary) */
+.batons-head{
+  display:flex;justify-content:space-between;align-items:end;
+  gap:24px;flex-wrap:wrap;margin-bottom:36px;
+}
+.batons-h2{
+  font-family:var(--f-display);
+  font-size:clamp(32px, 4vw, 48px);
+  font-weight:600;
+  letter-spacing:-0.025em;
+  margin:12px 0 0;
+  max-width:18ch;
+  line-height:1.05;
+}
+.batons{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:0;
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+}
+@media (max-width:880px){.batons{grid-template-columns:repeat(2, 1fr)}}
+@media (max-width:520px){.batons{grid-template-columns:1fr}}
+.baton-card{
+  padding:24px;
+  border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:var(--surface);
+  transition:background 0.15s ease;
+  display:flex;flex-direction:column;gap:12px;
+  min-height:170px;
+}
+.baton-card:hover{background:var(--surface-2)}
+/* trim trailing borders */
+.baton-card:nth-child(3n){border-right:0}
+@media (max-width:880px){
+  .baton-card:nth-child(3n){border-right:1px solid var(--border)}
+  .baton-card:nth-child(2n){border-right:0}
+}
+@media (max-width:520px){
+  .baton-card{border-right:0}
+}
+.baton-card__top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.baton-card__sym{
+  width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border-2);
+  border-radius:var(--r-sm);
+  background:var(--bg);
+  font-family:var(--f-mono);
+  font-size:18px;
+  color:var(--baton-color, var(--batondrop));
+}
+.baton-card__id{
+  font-family:var(--f-mono);
+  font-size:10px;
+  letter-spacing:0.15em;
+  color:var(--text-faint);
+}
+.baton-card__name{
+  font-family:var(--f-display);
+  font-weight:600;
+  font-size:var(--t-md);
+  letter-spacing:-0.01em;
+  margin:0;
+  color:var(--text);
+}
+.baton-card__d{font-size:var(--t-sm);color:var(--text-dim);margin:0}
+.baton-card__tag{
+  font-family:var(--f-mono);
+  font-size:10px;
+  color:var(--baton-color, var(--batondrop));
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  margin-top:auto;
+}
+
+/* spec / disclosure block */
+.spec{
+  display:grid;
+  grid-template-columns:1fr 1.4fr;
+  gap:64px;
+}
+@media (max-width:800px){.spec{grid-template-columns:1fr;gap:32px}}
+.spec h3{font-family:var(--f-display);font-size:var(--t-xl);font-weight:500;letter-spacing:-0.02em;margin:8px 0 0;max-width:14ch;line-height:1.1}
+.spec dl{margin:0;border-top:1px solid var(--border)}
+.spec__row{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:18px 0;border-bottom:1px solid var(--border);font-size:var(--t-sm);align-items:start}
+@media (max-width:600px){.spec__row{grid-template-columns:1fr;gap:6px}}
+.spec__k{font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:0.1em;text-transform:uppercase;color:var(--text-faint)}
+.spec__v{color:var(--text)}
+.spec__v a{color:var(--brand);border-bottom:1px solid color-mix(in oklab, var(--brand) 40%, transparent)}
+.spec__v a:hover{border-color:var(--brand)}
+.spec__v p{margin:0 0 8px}
+.spec__v p:last-child{margin-bottom:0}
+
+/* monetisation callout */
+.disclose{
+  margin-top:36px;
+  padding:24px 28px;
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  background:var(--surface);
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:20px;
+  align-items:start;
+}
+.disclose__icon{
+  width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border-2);
+  border-radius:var(--r-sm);
+  font-family:var(--f-mono);
+  color:var(--brand);
+}
+.disclose__h{font-family:var(--f-display);font-weight:500;font-size:var(--t-md);margin:0 0 6px;letter-spacing:-0.01em}
+.disclose__p{margin:0;color:var(--text-dim);font-size:var(--t-sm)}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a href="../index.html" aria-label="CTRLplay home">
+      <span class="logo logo--md"><span class="logo__ctrl">CTRL</span><span class="logo__play">play</span></span>
+    </a>
+    <nav class="nav__links" aria-label="primary">
+      <a href="../index.html" aria-current="page">games</a>
+      <a href="../privacy.html">privacy</a>
+      <a href="../contact.html">contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="wrap">
+    <div class="crumb">
+      <a href="../index.html">CTRLplay</a><span class="crumb__sep">/</span>
+      <a href="../index.html#games">Games</a><span class="crumb__sep">/</span>
+      <span style="color:var(--text-dim)">BatonDrop</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="wrap">
+    <div class="bd-hero">
+      <div>
+        <div class="bd-hero__meta">
+          <span class="badge badge--live"><span class="badge__dot"></span>Live</span>
+          <span style="font-family:var(--f-mono);font-size:var(--t-xs);letter-spacing:0.1em;color:var(--text-faint);text-transform:uppercase">Dark arcade · Reaction · Android</span>
+        </div>
+        <h1 class="bd-hero__title">Baton<em>Drop</em></h1>
+        <p class="bd-hero__tag">A baton falls from the dark. You have a fraction of a second to send it home.</p>
+        <div class="bd-hero__ctas">
+          <a class="cta cta--game" href="https://play.google.com/" rel="noopener">Get on Google Play <span class="cta__arrow">→</span></a>
+          <a class="cta cta--ghost" href="#how">How it plays</a>
+        </div>
+      </div>
+      <div>
+        <div class="bd-lanes" aria-hidden="true">
+          <div class="bd-lanes__grid">
+            <div></div><div></div><div></div><div></div>
+          </div>
+          <div class="bd-baton bd-baton--1"></div>
+          <div class="bd-baton bd-baton--2"></div>
+          <div class="bd-baton bd-baton--3"></div>
+          <div class="bd-lanes__floor"></div>
+          <div class="bd-lanes__pads">
+            <div class="bd-lanes__pad"></div>
+            <div class="bd-lanes__pad"></div>
+            <div class="bd-lanes__pad bd-lanes__pad--hit"></div>
+            <div class="bd-lanes__pad"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT PLAYS -->
+  <section class="section section--tight" id="how">
+    <div class="wrap">
+      <span class="eyebrow">How it plays</span>
+      <h2 style="font-family:var(--f-display);font-size:clamp(32px,4vw,48px);font-weight:600;letter-spacing:-0.025em;margin:14px 0 32px;max-width:22ch;line-height:1.05">Reaction game. Four lanes. Speed climbs.</h2>
+      <div class="how">
+        <div class="how__step">
+          <div class="how__num">01 / WATCH</div>
+          <h3 class="how__h">A baton falls.</h3>
+          <p class="how__p">It begins above the play field. Each level introduces new fall patterns, new tempo, new ways to be wrong.</p>
+        </div>
+        <div class="how__step">
+          <div class="how__num">02 / TAP</div>
+          <h3 class="how__h">Pick the right lane.</h3>
+          <p class="how__p">Four pads at the floor. The baton's lane is the answer. Tap before it lands. Miss it, it drops, you bleed health.</p>
+        </div>
+        <div class="how__step">
+          <div class="how__num">03 / CLIMB</div>
+          <h3 class="how__h">Levels increase speed and complexity.</h3>
+          <p class="how__p">Specials enter the rotation. The dungeon deepens. Reflex becomes pattern recognition.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BATONS BESTIARY -->
+  <section class="section" id="batons">
+    <div class="wrap">
+      <div class="batons-head">
+        <div>
+          <span class="eyebrow">Baton types · 11 in rotation</span>
+          <h2 class="batons-h2">A standard baton, plus ten that change the rules.</h2>
+        </div>
+        <div style="font-family:var(--f-mono);font-size:var(--t-xs);color:var(--text-faint);letter-spacing:0.1em">v1.0 / SPEC</div>
+      </div>
+
+      <div class="batons">
+        <article class="baton-card" style="--baton-color: var(--batondrop);">
+          <div class="baton-card__top">
+            <div class="baton-card__sym">|</div>
+            <div class="baton-card__id">B-00</div>
+          </div>
+          <h3 class="baton-card__name">Standard</h3>
+          <p class="baton-card__d">A clean fall, one lane, one tap. The rest of the catalogue is a deviation from this.</p>
+          <div class="baton-card__tag">Baseline</div>
+        </article>
+
+        <article class="baton-card" style="--baton-color: oklch(0.65 0.20 30);">
+          <div class="baton-card__top">
+            <div class="baton-card__sym">●</div>
+            <div class="baton-card__id">B-01</div>
+          </div>
+          <h3 class="baton-card__name">Bomb</h3>
+          <p class="baton-card__d">Do not catch this one. Tapping the bomb lane costs you. Leave it to the floor.</p>
+          <div class="baton-card__tag">Inverted · Trap</div>
+        </article>
+
+        <article class="baton-card" style="--baton-color: oklch(0.85 0.02 240);">
+          <div class="baton-card__top">
+            <div class="baton-card__sym">◌</div>
+            <div class="baton-card__id">B-02</div>
+          </div>
+          <h3 class="baton-card__name">Ghost</h3>
+          <p class="baton-card__d">Half-visible. Phases between lanes mid-fall. Your eye has to commit late.</p>
+          <div class="baton-card__tag">Phase · Visibility</div>
+        </article>
+
+        <article class="baton-card" style="--baton-color: oklch(0.78 0.16 145);">
+          <div class="baton-card__top">
+            <div class="baton-card__sym">∿</div>
+            <div class="baton-card__id">B-03</div>
+          </div>
+          <h3 class="baton-card__name">Bouncer</h3>
+          <p class="baton-card__d">Hits a wall, jumps lanes. Track the trajectory, not the start point.</p>
+          <div class="baton-card__tag">Path · Physics</div>
+        </article>
+
+        <article class="baton-card" style="--baton-color: oklch(0.72 0.19 60);">
+          <div class="baton-card__top">
+            <div class="baton-card__sym">»</div>
+            <div class="baton-card__id">B-04</div>
+          </div>
+          <h3 class="baton-card__name">Fast forward</h3>
+          <p class="baton-card__d">Time accelerates while it falls. The next batons inherit the new tempo until it resets.</p>
+          <div class="baton-card__tag">Time · Tempo</div>
+        </article>
+
+        <article class="baton-card" style="--baton-color: oklch(0.78 0.10 220);">
+          <div class="baton-card__top">
+            <div class="baton-card__sym">«</div>
+            <div class="baton-card__id">B-05</div>
+          </div>
+          <h3 class="baton-card__name">Slow motion</h3>
+          <p class="baton-card__d">Time stretches. A short window to clear a backlog or set up the next move.</p>
+          <div class="baton-card__tag">Time · Tempo</div>
+        </article>
+
+        <article class="baton-card" style="--baton-color: oklch(0.78 0.13 305);">
+          <div class="baton-card__top">
+            <div class="baton-card__sym">⇄</div>
+            <div class="baton-card__id">B-06</div>
+          </div>
+          <h3 class="baton-card__name">Swap</h3>
+          <p class="baton-card__d">Pads rearrange. Lane 1 is now where lane 4 was. Muscle memory becomes a liability.</p>
+          <div class="baton-card__tag">Layout · Rules</div>
+        </article>
+
+        <article class="baton-card" style="--baton-color: oklch(0.78 0.14 95);">
+          <div class="baton-card__top">
+            <div class="baton-card__sym">×2</div>
+            <div class="baton-card__id">B-07</div>
+          </div>
+          <h3 class="baton-card__name">Double</h3>
+          <p class="baton-card__d">Two batons fall together. Two lanes, one tempo. The game widens.</p>
+          <div class="baton-card__tag">Multi · Pressure</div>
+        </article>
+
+        <article class="baton-card" style="--baton-color: oklch(0.72 0.15 25);">
+          <div class="baton-card__top">
+            <div class="baton-card__sym">⌐</div>
+            <div class="baton-card__id">B-08</div>
+          </div>
+          <h3 class="baton-card__name">Magnet</h3>
+          <p class="baton-card__d">Pulls toward your last-tapped lane mid-fall. Useful, then dangerous, then useful again.</p>
+          <div class="baton-card__tag">Path · Modifier</div>
+        </article>
+
+        <article class="baton-card" style="--baton-color: oklch(0.74 0.12 180);">
+          <div class="baton-card__top">
+            <div class="baton-card__sym">▾</div>
+            <div class="baton-card__id">B-09</div>
+          </div>
+          <h3 class="baton-card__name">Shrink</h3>
+          <p class="baton-card__d">The pads at the floor narrow. Same lane count, less margin for the heel of your thumb.</p>
+          <div class="baton-card__tag">Layout · Hit-area</div>
+        </article>
+
+        <article class="baton-card" style="--baton-color: oklch(0.85 0.05 240);">
+          <div class="baton-card__top">
+            <div class="baton-card__sym">❄</div>
+            <div class="baton-card__id">B-10</div>
+          </div>
+          <h3 class="baton-card__name">Freeze</h3>
+          <p class="baton-card__d">A baton freezes mid-air. Tap when it thaws. The wait is the test.</p>
+          <div class="baton-card__tag">Time · Hold</div>
+        </article>
+      </div>
+
+      <div class="disclose">
+        <div class="disclose__icon">$</div>
+        <div>
+          <h3 class="disclose__h">Free to play. Cosmetic items available for purchase. Rewarded ads optional.</h3>
+          <p class="disclose__p">No paywalled progression, no energy timers. Cosmetic skins for batons and dungeon themes are the only paid items. Rewarded ads can be watched to recover health on a run; never required.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPEC -->
+  <section class="section section--tight" id="spec">
+    <div class="wrap">
+      <div class="spec">
+        <div>
+          <span class="eyebrow">The fine print</span>
+          <h3>Specs, support, the legal stuff.</h3>
+        </div>
+        <dl>
+          <div class="spec__row">
+            <dt class="spec__k">Platform</dt>
+            <dd class="spec__v">Android · Google Play. iOS not currently planned.</dd>
+          </div>
+          <div class="spec__row">
+            <dt class="spec__k">Status</dt>
+            <dd class="spec__v">Live in active development. Frequent balance and content updates.</dd>
+          </div>
+          <div class="spec__row">
+            <dt class="spec__k">Internet</dt>
+            <dd class="spec__v">Optional. Required only for global leaderboards and rewarded ads.</dd>
+          </div>
+          <div class="spec__row">
+            <dt class="spec__k">Age rating</dt>
+            <dd class="spec__v">Suitable for all audiences. No violence, no chat features.</dd>
+          </div>
+          <div class="spec__row">
+            <dt class="spec__k">Monetisation</dt>
+            <dd class="spec__v">
+              <p>Free to play. In-app purchases for cosmetic items only.</p>
+              <p>Rewarded ads are optional and player-initiated.</p>
+            </dd>
+          </div>
+          <div class="spec__row">
+            <dt class="spec__k">Get the game</dt>
+            <dd class="spec__v"><a href="https://play.google.com/" rel="noopener">Google Play listing →</a></dd>
+          </div>
+          <div class="spec__row">
+            <dt class="spec__k">Support</dt>
+            <dd class="spec__v"><a href="../contact.html">support@ctrlplay.com</a> · Response within 3 business days.</dd>
+          </div>
+          <div class="spec__row">
+            <dt class="spec__k">Privacy</dt>
+            <dd class="spec__v"><a href="../privacy.html">CTRLplay privacy policy →</a></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__inner">
+      <div class="foot__copy">
+        <span class="logo logo--sm"><span class="logo__ctrl">CTRL</span><span class="logo__play">play</span></span>
+        <span>© 2026</span>
+      </div>
+      <nav class="foot__links" aria-label="footer">
+        <a href="../privacy.html">Privacy</a>
+        <a href="../contact.html">Contact</a>
+        <a href="https://play.google.com/" rel="noopener">Google Play</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
